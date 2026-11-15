@@ -112,3 +112,11 @@ Requisiti già raccolti:
 - Verifica browser: schermata pausa e classifica visibili sul sito di sviluppo. Il browser ha restituito un ordine non coerente con la verifica SQL; resta quindi da completare una verifica di aggiornamento/cache e dell'ordine effettivamente renderizzato dopo la correzione.
 - Nessuna modifica al repository stabile e nessuna modifica al ramo main. Nessuna distribuzione agli store.
 - Limite sicurezza invariato: la validazione server-side limita punteggi palesemente impossibili, ma non costituisce un sistema anti-cheat completo.
+
+
+### 2026-11-15 — verifica conclusiva punto 4 dopo correzione ordinamento
+- Ripetuto il test sul sito di sviluppo dopo la modifica dell'RPC.
+- Verificato il pannello pausa/classifica dal browser sul sito `Ol-boreler2`.
+- Ordine effettivamente visualizzato e confermato: 1) TEST-JUPITER — 93; 2) TEST_GLOBAL_2 — 89; 3) Ezio — 71.
+- L'ordine mostrato coincide con la verifica SQL della funzione aggiornata.
+- Stato punto 4: COMPLETATO per invio/lettura multi-giocatore e visualizzazione della classifica globale ordinata. Restano separati i controlli di sicurezza anti-cheat e privacy, che non sono certificati da questo test.
