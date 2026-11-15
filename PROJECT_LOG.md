@@ -24,10 +24,10 @@ Requisiti già raccolti:
 ### Identità visiva
 - [x] Prima proposta di icona generata: illustrazione pixel-art alpina, protagonista sulla zattera, rapide e scritta OL BORÉLER.
 - [x] Varianti PNG locali preparate: 512×512, 192×192, 180×180 (Apple touch icon), 32×32 (favicon).
-- [ ] Integrare i file immagine nel repository di sviluppo (PNG pronti localmente; caricamento GitHub ancora da completare).
-- [ ] Aggiornare manifest PWA, favicon e icona iOS/Android.
-- [ ] Verificare l'icona su schermata iniziale Android e in installazione PWA.
-- Nota: la grafica è una prima proposta generata in questa sessione; non è ancora stata dichiarata definitiva né pubblicata.
+- [x] Integrare nel repository di sviluppo i cinque PNG approvati: sorgente, icone 512×512 e 192×192, Apple touch icon 180×180 e favicon 32×32.
+- [x] Aggiornare manifest PWA, favicon, Apple touch icon e sorgente di generazione icone Android.
+- [ ] Collaudo visivo su dispositivo Android e installazione PWA (verifica manuale successiva).
+- Nota: icona approvata dall'utente e integrata nel ramo di sviluppo; nessuna pubblicazione sul ramo main o sul repository stabile.
 
 ### Gioco e interfaccia
 - [x] Versione di sviluppo separata già presente in `Ol-boreler2`, con audio e controlli audio nella barra superiore.
@@ -92,3 +92,11 @@ Requisiti già raccolti:
 - Aggiornata la cache service worker da `ol-boreler-v1` a `ol-boreler-v2` per forzare il rinnovo degli asset.
 - Verifiche: file creato su GitHub; aggiornamenti manifest e service worker confermati dai commit. Non è stato ancora eseguito un collaudo visivo su dispositivo.
 - Stato punto 1: integrazione tecnica preliminare completata; approvazione visiva dell'icona e pacchetti PNG nativi restano da confermare prima della release.
+
+
+### 2026-11-15 — punto 1: identità visiva e integrazione icone
+- Confermata l'approvazione dell'icona pixel-art OL BORÉLER da parte dell'utente.
+- Integrati in `assets-src/` i cinque PNG caricati dall'utente su `main`, senza modificare `main`: `ol-boreler-icon.png`, `icon-512.png`, `icon-192.png`, `apple-touch-icon.png`, `favicon-32.png`.
+- Aggiornati `manifest.webmanifest` (icone PWA 192/512 e variante maskable), `index.html` (favicon e Apple touch icon), `sw.js` (cache `ol-boreler-v3`) e workflow Android (usa il PNG approvato come sorgente).
+- Collaudo visivo su dispositivo e installazione PWA: da eseguire nella successiva fase di test.
+- Stato punto 1: COMPLETATO per identità, approvazione e integrazione degli asset nel ramo di sviluppo.

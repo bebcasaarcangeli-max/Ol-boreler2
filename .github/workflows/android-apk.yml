@@ -8,7 +8,11 @@ on:
       - 'audio-engine.js'
       - 'package.json'
       - 'capacitor.config.json'
-      - 'assets-src/icon-source.b64'
+      - 'assets-src/ol-boreler-icon.png'
+      - 'assets-src/icon-512.png'
+      - 'assets-src/icon-192.png'
+      - 'assets-src/apple-touch-icon.png'
+      - 'assets-src/favicon-32.png'
       - '.github/workflows/android-apk.yml'
     branches: [main]
 
@@ -36,8 +40,8 @@ jobs:
         run: |
           mkdir -p www assets
           cp index.html audio-engine.js www/
-          base64 -d assets-src/icon-source.b64 > /tmp/icon.jpg
-          node -e "require('sharp')('/tmp/icon.jpg').resize(512,512,{fit:'cover'}).png().toFile('assets/icon-only.png').then(()=>{})"
+          cp assets-src/ol-boreler-icon.png /tmp/icon.png
+          node -e "require('sharp')('/tmp/icon.png').resize(512,512,{fit:'cover'}).png().toFile('assets/icon-only.png').then(()=>{})"
           cp assets/icon-only.png assets/splash.png
       - name: Add Android project
         run: npx cap add android
