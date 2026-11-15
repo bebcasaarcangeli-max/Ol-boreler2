@@ -30,6 +30,8 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
+      - name: Install Capacitor
+        run: npm install
       - name: Prepare web app
         run: |
           mkdir -p www assets
@@ -37,8 +39,6 @@ jobs:
           base64 -d android/icon-source.b64 > /tmp/icon.jpg
           node -e "require('sharp')('/tmp/icon.jpg').resize(512,512,{fit:'cover'}).png().toFile('assets/icon-only.png').then(()=>{})"
           cp assets/icon-only.png assets/splash.png
-      - name: Install Capacitor
-        run: npm install
       - name: Add Android project
         run: npx cap add android
       - name: Generate launcher icons
