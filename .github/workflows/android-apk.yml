@@ -8,7 +8,7 @@ on:
       - 'audio-engine.js'
       - 'package.json'
       - 'capacitor.config.json'
-      - 'android/icon-source.b64'
+      - 'assets-src/icon-source.b64'
       - '.github/workflows/android-apk.yml'
     branches: [main]
 
@@ -36,7 +36,7 @@ jobs:
         run: |
           mkdir -p www assets
           cp index.html audio-engine.js www/
-          base64 -d android/icon-source.b64 > /tmp/icon.jpg
+          base64 -d assets-src/icon-source.b64 > /tmp/icon.jpg
           node -e "require('sharp')('/tmp/icon.jpg').resize(512,512,{fit:'cover'}).png().toFile('assets/icon-only.png').then(()=>{})"
           cp assets/icon-only.png assets/splash.png
       - name: Add Android project
