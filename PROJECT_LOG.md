@@ -83,3 +83,12 @@ Requisiti già raccolti:
 - Limite dichiarato: non è un anti-cheat completo. Il punteggio nasce ancora nel browser; un utente determinato può manipolare il client e creare identità locali diverse. Il controllo server-side rende più difficile l'invio di valori palesemente impossibili, ma non dimostra che la partita sia stata giocata correttamente.
 - Verifiche automatizzate: privilegi SQL e stato ACTIVE della funzione confermati. Test HTTP end-to-end della funzione, partita reale, due giocatori e test su smartphone ancora da eseguire.
 - Advisory Supabase: RLS senza policy su `game_scores` e `ol_boreler_game_sessions` è intenzionale perché l'accesso passa dalle funzioni server; l'advisory segnala inoltre che la lettura globale è una RPC SECURITY DEFINER pubblica. La lettura pubblica è intenzionale per la classifica, da ricontrollare prima del rilascio.
+
+
+### 2026-11-15 — ciclo di sviluppo, punto 1 (integrazione preliminare icona)
+- Verificato il branch di sviluppo e letto lo stato effettivo dei file.
+- Risolto un riferimento rotto: `index.html` e `sw.js` richiamavano `icon.svg`, ma il file non era presente nel repository.
+- Creato `icon.svg` usando la risorsa immagine già archiviata in `assets-src/icon-source.b64`; registrata nel manifest PWA con finalità `any` (non dichiarata maskable).
+- Aggiornata la cache service worker da `ol-boreler-v1` a `ol-boreler-v2` per forzare il rinnovo degli asset.
+- Verifiche: file creato su GitHub; aggiornamenti manifest e service worker confermati dai commit. Non è stato ancora eseguito un collaudo visivo su dispositivo.
+- Stato punto 1: integrazione tecnica preliminare completata; approvazione visiva dell'icona e pacchetti PNG nativi restano da confermare prima della release.
