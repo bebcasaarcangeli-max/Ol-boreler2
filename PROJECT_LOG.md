@@ -71,3 +71,15 @@ Requisiti già raccolti:
 - Verifica SQL eseguita: `anon` e `authenticated` possono chiamare le RPC previste; il ruolo `PUBLIC` non dispone più di EXECUTE diretto. La lettura pubblica della classifica resta disponibile tramite il ruolo `anon`.
 - Limite di sicurezza ancora aperto: il server riceve il punteggio dal browser e il player ID è conservato localmente. Quindi la classifica non è ancora resistente alla falsificazione dei punteggi; non dichiarare completato l'anti-cheat.
 - Test end-to-end da browser/dispositivo e prova con due giocatori ancora da eseguire.
+
+### 2026-11-15 — prima validazione server-side dei punteggi
+- Creato e distribuito su Supabase il servizio Edge Function `ol-boreler-score`, versione 2, stato ACTIVE.
+- Il gioco apre una sessione server prima di ogni discesa; il server associa sessione e player ID, registra l'orario iniziale e accetta un solo invio per sessione.
+- Il server rifiuta partite inferiori a 3 secondi e punteggi superiori a un limite temporale prudenziale (26 punti/secondo + 25 punti di tolleranza), coerente con la velocità massima del ciclo di gioco.
+- `index.html` ora avvia la sessione tramite Edge Function e invia il risultato alla stessa funzione; il vecchio RPC di inserimento non è più accessibile ai ruoli anonimo/autenticato.
+- Tabella sessioni con RLS attivo e nessun accesso diretto a `anon` e `authenticated`. Verificato che `service_role` può leggere/creare/aggiornare sessioni e chiamare l'RPC interno.
+- Commit front-end: `e951a018a4e49cbba35cf166cf6a114077d711a6` (integrazione sessioni) e `9b7f067a6dc080262618bb2fef787185ece58829` (arresto partita precedente prima del riavvio).
+- Edge Function distribuita: versione 2, hash `555386864e3b65e4db4f890643beaefbc207c11fb599f6db3292577b9c69202d`.
+- Limite dichiarato: non è un anti-cheat completo. Il punteggio nasce ancora nel browser; un utente determinato può manipolare il client e creare identità locali diverse. Il controllo server-side rende più difficile l'invio di valori palesemente impossibili, ma non dimostra che la partita sia stata giocata correttamente.
+- Verifiche automatizzate: privilegi SQL e stato ACTIVE della funzione confermati. Test HTTP end-to-end della funzione, partita reale, due giocatori e test su smartphone ancora da eseguire.
+- Advisory Supabase: RLS senza policy su `game_scores` e `ol_boreler_game_sessions` è intenzionale perché l'accesso passa dalle funzioni server; l'advisory segnala inoltre che la lettura globale è una RPC SECURITY DEFINER pubblica. La lettura pubblica è intenzionale per la classifica, da ricontrollare prima del rilascio.
