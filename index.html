@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<meta name="theme-color" content="#102b2a"><link rel="icon" type="image/svg+xml" href="icon.svg"><title>Ol Boréler</title>
+<meta name="theme-color" content="#102b2a"><link rel="manifest" href="./manifest.webmanifest"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="OL BORÉLER"><link rel="icon" type="image/svg+xml" href="icon.svg"><title>Ol Boréler</title>
 <style>
 *{box-sizing:border-box}body{margin:0;background:#102b2a;color:#f4e8c7;font-family:monospace;display:flex;min-height:100svh;align-items:center;justify-content:center;padding:12px}
 main{width:min(100%,440px);text-align:center}.topbar{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:4px 0 2px}h1{font-size:clamp(18px,5.5vw,30px);letter-spacing:1.5px;margin:0;color:#f5d47b;white-space:nowrap}.audio-tools{display:flex;align-items:center;gap:5px;flex-shrink:0}p{margin:2px 0 8px;font-size:11px}
@@ -11,7 +11,7 @@ canvas{display:block;width:100%;height:auto;max-height:68svh;aspect-ratio:3/5;ba
 .controls{display:flex;gap:12px;margin-top:10px}.controls button,#start,#audio{flex:1;background:#d5b879;color:#18312c;border:0;padding:14px;font:bold 18px monospace;touch-action:none;border-radius:4px}
 #start{width:100%;margin-top:9px;font-size:15px}#audio{flex:0 0 auto;background:#315b50;color:#f4e8c7;border:2px solid #d5b879;padding:7px 8px;font:bold 10px monospace;border-radius:4px;white-space:nowrap}.volume{display:flex;align-items:center;gap:4px;padding:5px 6px;background:#1c4540;border:2px solid #d5b879;font:bold 9px monospace;white-space:nowrap}.volume input{width:55px;min-width:35px;margin:0;accent-color:#f5d47b}.volume output{width:25px;text-align:right}.hint{font-size:10px;opacity:.8;margin-top:8px}
 </style></head>
-<body><main><div class="topbar"><h1>OL BORÉLER</h1><div class="audio-tools"><button id="audio" aria-pressed="false">AUDIO: OFF</button><label class="volume" for="volume">VOL <input id="volume" type="range" min="0" max="100" value="65"><output id="volumeValue">65%</output></label></div></div><p>LA CORSA SULL'ACQUA</p>
+<body><main><div class="topbar"><h1>OL BORÉLER</h1><div class="audio-tools"><button id="install" hidden style="background:#f5d47b;color:#18312c;border:0;padding:7px 8px;font:bold 10px monospace;border-radius:4px">INSTALLA</button><button id="audio" aria-pressed="false">AUDIO: OFF</button><label class="volume" for="volume">VOL <input id="volume" type="range" min="0" max="100" value="65"><output id="volumeValue">65%</output></label></div></div><p>LA CORSA SULL'ACQUA</p>
 <div class="hud"><span>PUNTI <b id="score">0</b></span><span>VITE <b id="lives">3</b></span><span>RECORD <b id="best">0</b></span></div>
 <canvas id="game" width="240" height="400" aria-label="Gioco Ol Boréler"></canvas>
 <div class="controls"><button id="left" aria-label="Sinistra">◀</button><button id="right" aria-label="Destra">▶</button></div>
@@ -21,6 +21,7 @@ canvas{display:block;width:100%;height:auto;max-height:68svh;aspect-ratio:3/5;ba
 import { createSidEngine } from "./audio-engine.js";
 (()=>{
 const sid = createSidEngine();
+let installPrompt=null;const installBtn=document.getElementById('install');window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();installPrompt=e;installBtn.hidden=false});installBtn.addEventListener('click',async()=>{if(!installPrompt)return;installPrompt.prompt();await installPrompt.userChoice;installPrompt=null;installBtn.hidden=true});window.addEventListener('appinstalled',()=>{installBtn.hidden=true});if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js'));
 const c=document.getElementById('game'),x=c.getContext('2d'),W=240,H=400;
 const $=id=>document.getElementById(id);let player=120,held=0,items=[],score=0,lives=3,best=+(localStorage.olBorelerBest||0),speed=1,spawn=0,running=false,last=0,water=0,raf=0,feedback=0;
 $('best').textContent=best;
