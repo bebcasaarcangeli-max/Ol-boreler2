@@ -120,3 +120,48 @@ Requisiti già raccolti:
 - Ordine effettivamente visualizzato e confermato: 1) TEST-JUPITER — 93; 2) TEST_GLOBAL_2 — 89; 3) Ezio — 71.
 - L'ordine mostrato coincide con la verifica SQL della funzione aggiornata.
 - Stato punto 4: COMPLETATO per invio/lettura multi-giocatore e visualizzazione della classifica globale ordinata. Restano separati i controlli di sicurezza anti-cheat e privacy, che non sono certificati da questo test.
+
+
+## Prossima fase — punto 5: rifinitura e preparazione alla distribuzione
+
+Programma concordato con l'utente per la prossima sessione. Questa sezione registra il perimetro del lavoro: **non significa che le attività siano già state eseguite**.
+
+1. **Controlli finali del gioco**
+   - Ricontrollare avvio, comandi, collisioni, punteggio e vite.
+   - Verificare pausa/ripresa, game over e riavvio.
+   - Eseguire prove su smartphone e PC, includendo le diverse dimensioni dello schermo.
+
+2. **Rifinitura grafica**
+   - Controllare icona e coerenza delle schermate iniziale, pausa e game over.
+   - Rifinire leggibilità di testi, pulsanti, colori e interfaccia su schermi piccoli.
+
+3. **Audio e usabilità**
+   - Verificare musica, effetti sonori e controlli audio.
+   - Controllare i comandi touch e la raggiungibilità dei controlli.
+   - Valutare un'opzione per disattivare l'audio.
+
+4. **Classifica e sicurezza**
+   - Ricontrollare nickname, invio punteggi e classifica globale.
+   - Verificare limiti e moderazione dei nickname, invii ripetuti e punteggi anomali.
+   - Rafforzare, per quanto tecnicamente possibile, i controlli anti-cheat; documentare chiaramente i limiti residui.
+   - Verificare privacy e gestione dei dati prima di un rilascio pubblico.
+
+5. **Preparazione alla distribuzione**
+   - Verificare installazione e aggiornamento della PWA.
+   - Preparare il pacchetto Android (APK e/o AAB) e verificarne la generazione.
+   - Preparare nome, icone, schermate e materiali descrittivi per un'eventuale pubblicazione.
+   - Verificare i requisiti aggiornati degli store solo quando si avvicinerà la distribuzione.
+
+6. **Collaudo finale e consegna**
+   - Eseguire un collaudo complessivo e registrare gli eventuali problemi e le correzioni.
+   - Aggiornare la documentazione e identificare con precisione la versione pronta per la prova/distribuzione.
+   - Mantenere separati branch e repository di sviluppo dalla versione stabile.
+
+### Regole operative della fase
+- Lavorare esclusivamente nel repository `bebcasaarcangeli-max/Ol-boreler2`, branch `feature/brand-icon-and-release-tracking`.
+- Non modificare il repository stabile `bebcasaarcangeli-max/Ol-boreler` né il branch `main`.
+- Non effettuare merge, pubblicazioni sugli store o sostituzioni della versione stabile senza autorizzazione esplicita dell'utente.
+- Procedere un punto alla volta, secondo le indicazioni dell'utente.
+- Gli stati saranno dichiarati `Completato` solo dopo verifica; in caso contrario usare `In lavorazione`, `Da iniziare` o `In attesa di Ezio` secondo necessità.
+
+**Stato iniziale del programma:** tutti e sei i sotto-punti della rifinitura sono registrati come `Da iniziare`. I punti 1–4 del ciclo precedente risultano completati secondo le verifiche annotate sopra.
