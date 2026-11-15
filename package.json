@@ -9,6 +9,7 @@
   "devDependencies": {
     "@capacitor/cli": "latest",
     "@capacitor/android": "latest",
-    "@capacitor/assets": "latest"
+    "@capacitor/assets": "latest",
+    "sharp": "latest"
   }
 }
