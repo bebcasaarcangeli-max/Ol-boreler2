@@ -24,16 +24,17 @@ Requisiti già raccolti:
 ### Identità visiva
 - [x] Prima proposta di icona generata: illustrazione pixel-art alpina, protagonista sulla zattera, rapide e scritta OL BORÉLER.
 - [x] Varianti PNG locali preparate: 512×512, 192×192, 180×180 (Apple touch icon), 32×32 (favicon).
-- [ ] Integrare i file immagine nel repository di sviluppo.
+- [ ] Integrare i file immagine nel repository di sviluppo (PNG pronti localmente; caricamento GitHub ancora da completare).
 - [ ] Aggiornare manifest PWA, favicon e icona iOS/Android.
 - [ ] Verificare l'icona su schermata iniziale Android e in installazione PWA.
 - Nota: la grafica è una prima proposta generata in questa sessione; non è ancora stata dichiarata definitiva né pubblicata.
 
 ### Gioco e interfaccia
 - [x] Versione di sviluppo separata già presente in `Ol-boreler2`, con audio e controlli audio nella barra superiore.
-- [ ] Schermata iniziale e nickname.
-- [ ] Pausa/ripresa accessibile durante la partita.
-- [ ] Classifica visibile dalla pausa.
+- [x] Prima schermata iniziale con campo nickname (max 20 caratteri) e memorizzazione locale del nickname — implementata nel branch di sviluppo, da collaudare.
+- [ ] Verificare comportamento nickname su dispositivi/browser diversi.
+- [x] Pulsante pausa in barra superiore, ripresa e ritorno alla schermata iniziale — implementati nel branch di sviluppo, da collaudare.
+- [x] Schermata pausa con richiesta della top 10 globale tramite RPC Supabase — implementata nel branch di sviluppo, da collaudare.
 - [ ] Gestione di nickname, record personale e invio punteggio.
 
 ### Classifica globale e backend
@@ -42,7 +43,7 @@ Requisiti già raccolti:
 - [x] RPC `get_global_leaderboard` per leggere i migliori punteggi globali.
 - [x] RPC `submit_game_score` iniziale per inviare punteggi.
 - [ ] Rafforzare la verifica server-side e la protezione da punteggi falsificati/spam prima del rilascio pubblico.
-- [ ] Collegare il gioco al backend dedicato.
+- [x] Collegamento iniziale del client alle RPC Supabase di classifica e invio punteggio — implementato, da verificare end-to-end.
 - [ ] Testare invio e lettura da almeno due dispositivi/browser distinti.
 - [ ] Verificare privacy, conservazione dati e moderazione dei nickname.
 
@@ -56,6 +57,8 @@ Requisiti già raccolti:
 ## Registro modifiche
 
 ### 2026-11-15
+- Aggiornato `index.html` nel branch `feature/brand-icon-and-release-tracking` (commit `a14e53d40c3e123b148308fbe44df451cc35851b`): ingresso con nickname, pulsante pausa, ripresa/ritorno all'inizio, lettura classifica globale e invio punteggio al backend dedicato.
+- Queste funzioni sono implementate nel codice ma non ancora collaudate su dispositivo né verificate end-to-end con due giocatori reali.
 - Creato il branch di lavoro `feature/brand-icon-and-release-tracking` a partire da `main`.
 - Creato questo registro per conservare requisiti, avanzamento e verifiche.
 - Generata una proposta di icona pixel-art e preparate localmente le varianti PNG indicate sopra.
