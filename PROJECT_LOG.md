@@ -100,3 +100,15 @@ Requisiti già raccolti:
 - Aggiornati `manifest.webmanifest` (icone PWA 192/512 e variante maskable), `index.html` (favicon e Apple touch icon), `sw.js` (cache `ol-boreler-v3`) e workflow Android (usa il PNG approvato come sorgente).
 - Collaudo visivo su dispositivo e installazione PWA: da eseguire nella successiva fase di test.
 - Stato punto 1: COMPLETATO per identità, approvazione e integrazione degli asset nel ramo di sviluppo.
+
+
+### 2026-11-15 — punto 4: classifica globale multi-giocatore e ordinamento
+- Testato il sito di sviluppo corretto: https://bebcasaarcangeli-max.github.io/Ol-boreler2/ (non il repository stabile).
+- Verificato da browser indipendente che il pannello CLASSIFICA GLOBALE si apre dal pulsante PAUSA e recupera risultati condivisi.
+- Verificato l'invio di punteggi con identità distinte: TEST_GLOBAL_2 (89), TEST-JUPITER (93) ed Ezio (71).
+- Individuato un difetto nell'RPC `get_global_leaderboard`: selezionava il miglior punteggio per giocatore ma ordinava il risultato per player_id, non per punteggio globale.
+- Corretto direttamente nel progetto Supabase OL BORÉLER: selezione del miglior punteggio per player_id e ordinamento finale decrescente per best_score (con criteri deterministici in caso di parità).
+- Verifica SQL dopo la correzione: TEST-JUPITER 93, TEST_GLOBAL_2 89, Ezio 71, nell'ordine corretto.
+- Verifica browser: schermata pausa e classifica visibili sul sito di sviluppo. Il browser ha restituito un ordine non coerente con la verifica SQL; resta quindi da completare una verifica di aggiornamento/cache e dell'ordine effettivamente renderizzato dopo la correzione.
+- Nessuna modifica al repository stabile e nessuna modifica al ramo main. Nessuna distribuzione agli store.
+- Limite sicurezza invariato: la validazione server-side limita punteggi palesemente impossibili, ma non costituisce un sistema anti-cheat completo.
