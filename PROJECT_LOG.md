@@ -64,3 +64,10 @@ Requisiti già raccolti:
 - Generata una proposta di icona pixel-art e preparate localmente le varianti PNG indicate sopra.
 - Nessuna modifica al repository stabile `Ol-boreler`.
 - Nessuna pubblicazione sul branch `main` e nessuna distribuzione agli store.
+
+### 2026-11-15 — controllo invio punteggi e permessi RPC
+- Aggiornato `index.html` (commit `369f1f55a2bd484ac85e98e2d20ada1246764877`): l'invio del punteggio ora controlla la risposta HTTP e il campo `accepted` restituito dal server; mostra un esito comprensibile al giocatore e non considera riuscita una richiesta fallita.
+- Aggiornati i privilegi delle RPC Supabase: revocato l'accesso ereditato da `PUBLIC` e concesso esplicitamente a `anon` e `authenticated`.
+- Verifica SQL eseguita: `anon` e `authenticated` possono chiamare le RPC previste; il ruolo `PUBLIC` non dispone più di EXECUTE diretto. La lettura pubblica della classifica resta disponibile tramite il ruolo `anon`.
+- Limite di sicurezza ancora aperto: il server riceve il punteggio dal browser e il player ID è conservato localmente. Quindi la classifica non è ancora resistente alla falsificazione dei punteggi; non dichiarare completato l'anti-cheat.
+- Test end-to-end da browser/dispositivo e prova con due giocatori ancora da eseguire.
