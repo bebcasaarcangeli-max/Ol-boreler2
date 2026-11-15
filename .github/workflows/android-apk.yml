@@ -1,0 +1,58 @@
+name: Build OL BORÉLER Android APK
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'index.html'
+      - 'audio-engine.js'
+      - 'package.json'
+      - 'capacitor.config.json'
+      - 'android/icon-source.b64'
+      - '.github/workflows/android-apk.yml'
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+      - name: Set up Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+      - name: Set up Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Prepare web app
+        run: |
+          mkdir -p www assets
+          cp index.html audio-engine.js www/
+          base64 -d android/icon-source.b64 > /tmp/icon.jpg
+          convert /tmp/icon.jpg -resize 512x512^ -gravity center -extent 512x512 assets/icon-only.png
+          cp assets/icon-only.png assets/splash.png
+      - name: Install Capacitor
+        run: npm install
+      - name: Add Android project
+        run: npx cap add android
+      - name: Generate launcher icons
+        run: npx capacitor-assets generate --android
+      - name: Sync Android project
+        run: npx cap sync android
+      - name: Build APK
+        working-directory: android
+        run: ./gradlew assembleDebug --no-daemon
+      - name: Upload APK
+        uses: actions/upload-artifact@v5
+        with:
+          name: OL-BORELER-Android-APK
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
+          retention-days: 30
