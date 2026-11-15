@@ -35,7 +35,7 @@ jobs:
           mkdir -p www assets
           cp index.html audio-engine.js www/
           base64 -d android/icon-source.b64 > /tmp/icon.jpg
-          convert /tmp/icon.jpg -resize 512x512^ -gravity center -extent 512x512 assets/icon-only.png
+          node -e "require('sharp')('/tmp/icon.jpg').resize(512,512,{fit:'cover'}).png().toFile('assets/icon-only.png').then(()=>{})"
           cp assets/icon-only.png assets/splash.png
       - name: Install Capacitor
         run: npm install
